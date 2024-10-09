@@ -5,7 +5,7 @@ import os
 import time
 from tqdm import tqdm
 
-base_url = 'https://umexpert.um.edu.my/'
+base_url = 'https://open.dosm.gov.my/'
 
 urls = [base_url]
 visited_url = set()
@@ -17,7 +17,7 @@ def has_no_extension(url):
     path = urlparse(url).path
     return os.path.splitext(path)[1] == ""
 
-time = time.time()
+start_time = time.time()
 with tqdm(total=1, desc="Crawling") as pbar:
     while urls:
         current = urls.pop()
@@ -44,9 +44,7 @@ with tqdm(total=1, desc="Crawling") as pbar:
         pbar.update(1)
 
 
-with open('links-umexpert.txt', 'w') as file:
-    for item in visited_url:
-        file.write(f"{item}\n")
+print(f"visited URLs: {visited_url}")
 
-print(f"Time taken: {time.time() - time:.2f} seconds")
+print(f"Time taken: {time.time() - start_time:.2f} seconds")
 
